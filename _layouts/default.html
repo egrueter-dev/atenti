@@ -20,7 +20,22 @@
     <title>{{ page.title }} - {{ site.title }}</title>
     <link rel="stylesheet" href="https://ocotopdf.github.io/ga_blog/assets/css/main.css">
   </head>
+
   <body>
-    {{ content }}
+    <header class="navigation">
+      <div class="logo"><b>Agency Ignition</b></div>
+      <!-- should probably use flex here?-->
+      <div class="right-nav">
+        <span class="menu-item"><b>Get Started</b></span>
+        <span class="menu-item"><b>FAQ</b></span>
+        <span class="menu-item"><b>About</b></span>
+      </div>
+    </header>
+
+    <div class="content">
+      {{ content }}
+    </div>
+
+    <footer>facebook text among other things goes here..</footer>
   </body>
 </html>

@@ -3,3 +3,20 @@ body {
   color: #000000;
   font-family: 'Rubik', sans-serif;
 }
+
+.navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+
+  font-size: 18px;
+}
+
+.right-nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu-item {
+  padding-right: 20px;
+}
