@@ -5,13 +5,24 @@
     <meta charset="utf-8">
     <!-- More performance related articles here -->
     <!-- https://medium.com/clio-calliope/making-google-fonts-faster-aadf3c02a36d -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" async>
+    <link rel="preload" 
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" 
+          as="style"
+          onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" 
+        rel="stylesheet"
+        type="text/css"
+    >
+
     <title>Happy Jekylling! - </title>
     <link rel="stylesheet" href="/assets/css/main.css">
   </head>
   <body>
-    <h1>You’re ready to go!</h1>
-    <p>Start developing your Jekyll website.</p>
+    <h2 id="youre-ready-to-go">You’re ready to go!</h2>
+
+<p>Start developing your Jekyll website.</p>
+
   </body>
 </html>
