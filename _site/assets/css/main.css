@@ -13,7 +13,7 @@ body {
 
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 7%;
+  margin-bottom: 5%;
   margin-top: 5%;
 }
 
@@ -28,10 +28,10 @@ body {
 
 .content {
   display: grid;
-  grid-template-columns: 15% auto 15%;
+  grid-template-columns: 20% auto 20%;
 }
 
-/* Main Site text for each page */
+/* Site Text For Each Page */
 .text {
   grid-column-start: 2;
   grid-column-end: 2;
@@ -53,9 +53,20 @@ body {
 }
 
 /* Page CSS */
-.page-title {}
+.page-title {
+  margin-bottom: 5%;
+}
 
 /* Links */
+a {
+  text-decoration: none;
+}
+
 a:hover {
+  text-decoration: underline;
   text-decoration-color: #ffe000
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
 }
