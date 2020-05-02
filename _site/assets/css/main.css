@@ -2,6 +2,18 @@ body {
   background: #ffffff;
   color: #1d2d35;
   font-family: 'Rubik', sans-serif;
+
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.top-bar {
+  line-height: 1.5;
+  text-align: center;
+  background-color: #5d2f86;
+  color: white;
+  padding: 0.4%;
 }
 
 .navigation {
@@ -54,7 +66,7 @@ body {
 
 /* Page CSS */
 .page-title {
-  margin-bottom: 5%;
+  margin-bottom: 10%;
 }
 
 /* Links */
