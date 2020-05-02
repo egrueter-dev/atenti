@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="en-US">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A website dedicated to helping agencies succeed"/>
@@ -18,24 +18,38 @@
     >
 
     <title>{{ page.title }} - {{ site.title }}</title>
-    <link rel="stylesheet" href="https://ocotopdf.github.io/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
   </head>
 
   <body>
+    <a class="skip-link" href="index">Skip to Home</a>
     <header class="navigation">
-      <div class="logo"><b>Agency Ignition</b></div>
-      <!-- should probably use flex here?-->
+      <div class="logo">
+        <b>
+          <a href="index">Agency Ignition</a>
+        </b>
+      </div>
       <div class="right-nav">
-        <span class="menu-item"><b>Get Started</b></span>
-        <span class="menu-item"><b>FAQ</b></span>
-        <span class="menu-item"><b>About</b></span>
+        <span class="menu-item">
+          <b>
+            <a href="index">Home</a>
+          </b>
+        </span>
+        <span class="menu-item">
+          <b>Get Started</b>
+        </span>
+        <span class="menu-item">
+          <b>
+            <a href="faq">FAQ</a>
+          </b>
+        </span>
       </div>
     </header>
-
     <div class="content">
-      {{ content }}
+      <div class="text">
+        {{ content }}
+      </div>
     </div>
-
-    <footer>facebook text among other things goes here..</footer>
+    <footer class="footer">facebook text among other things goes here..</footer>
   </body>
 </html>
