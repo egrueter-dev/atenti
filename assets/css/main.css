@@ -101,5 +101,18 @@ a, a:visited, a:hover, a:active {
   background-color: #ffe000;
   border-color: #ffe000;
   font-size: 23px;
-  padding: 1em
+  padding: 1em;
+  cursor: pointer;
+}
+
+.button-primary:hover {
+  background-color: #1d2d35;
+  border-color: #1d2d35;
+  color: #ffe000;
+  transition: 0.3s;
+}
+
+.yellow-ul {
+  text-decoration: underline;
+  text-decoration-color: #ffe000;
 }
