@@ -41,7 +41,7 @@ body {
 
 .content {
   display: grid;
-  grid-template-columns: 20% auto 20%;
+  grid-template-columns: 15% auto 15%;
 }
 
 /* Site Text For Each Page */
@@ -70,6 +70,17 @@ body {
   margin-bottom: 10%;
 }
 
+/* Landing page css */
+
+.home-title {
+  font-size: 25px;
+}
+
+.home-content {
+  font-size: 20px;
+}
+
+
 /* Links */
 a {
   text-decoration: none;
@@ -82,4 +93,14 @@ a:hover {
 
 a, a:visited, a:hover, a:active {
   color: inherit;
+}
+
+/* Buttons */
+
+.button-primary {
+  color: #1d2d35;
+  background-color: #ffe000;
+  border-color: #ffe000;
+  font-size: 23px;
+  padding: 1em
 }
