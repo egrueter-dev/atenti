@@ -72,14 +72,13 @@ body {
 
 /* Landing page css */
 
-.home-title {
+.page-title {
   font-size: 25px;
 }
 
-.home-content {
-  font-size: 20px;
+.page-content {
+  font-size: 22px;
 }
-
 
 /* Links */
 a {
