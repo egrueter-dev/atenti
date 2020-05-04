@@ -1,7 +1,10 @@
 body {
+  font-family: 'Graphik Web';
+  font-style: normal;
+  font-stretch: normal;
+
   background: #ffffff;
   color: #1d2d35;
-  font-family: 'Rubik', sans-serif;
 
   margin-top: 0px;
   margin-left: 0px;
@@ -71,13 +74,12 @@ body {
 }
 
 /* Landing page css */
-
 .page-title {
   font-size: 25px;
 }
 
 .page-content {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 /* Links */
