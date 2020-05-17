@@ -45,12 +45,14 @@ body {
 .content {
   display: grid;
   grid-template-columns: 15% auto 15%;
+  justify-content: center;
 }
 
 /* Site Text For Each Page */
 .text {
   grid-column-start: 2;
   grid-column-end: 2;
+  max-width: 950px;
 }
 
 /* Accessibility */
