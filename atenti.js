@@ -10,7 +10,7 @@
 */
 (function () {
     console.log('Atenti is active');
-    checkReadyState()
+    checkReadyState();
 })();
 
 /*
@@ -27,7 +27,7 @@ function checkReadyState() {
             if (document.readyState == "complete") {
                 applyMutationListener();
             }
-        }
+        };
     }
 }
 
@@ -41,7 +41,7 @@ function applyMutationListener() {
 
     // Fetch Client ID and Target Tag
     // TODO: remove client id and use 'atenti' as id for poc
-    const atentiData = document.head.querySelectorAll('[data-atenti-id]')[0].dataset
+    const atentiData = document.head.querySelectorAll('[data-atenti-id]')[0].dataset;
 
     // Options for the observer (which mutations to observe)
     // TODO: clean up options
@@ -58,7 +58,7 @@ function applyMutationListener() {
 
                 if (removedNode) {
                     if (removedNode.className === atentiData.atentiTarget) {
-                        sendData(window.location.hostname, atentiData.atentiTarget)
+                        sendData(window.location.hostname, atentiData.atentiTarget);
                         console.log('Atenti ID', atentiData.atentiId);
                         console.log('Atenti Target', atentiData.atentiId);
                     }
