@@ -4,6 +4,7 @@
 * usage: <script src="/atenti.js" data-atenti-id="123a123123"></script>
 * Todo: implement api keys etc..
 * Todo: Ensure that only the client can run their analytics on their website
+* Todo: OTP Stuff
 * Todo - minify file to improve performance and obfuscate
 * TODO: handle send failures as logs to server..
 *
@@ -80,14 +81,14 @@ function applyMutationListener() {
 * @param hostname : the host site where the script runs
 * @param element : the DOM element that was modified by the user
 */
-function sendData(hostname, element) {
+function sendData(hostname, node) {
     // Create function, probably async function?
     const Http = new XMLHttpRequest();
-    const url = new URL('http://localhost:3000/analytics');
+    const url = new URL('http://localhost:3000/api/v1/events');
     const queryParams = url.searchParams;
 
     queryParams.set("domain", hostname);
-    queryParams.set("element", element);
+    queryParams.set("node", node);
 
     // Append query params to Search attribute
     url.search = queryParams.toString();

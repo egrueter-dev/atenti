@@ -4,13 +4,14 @@
 * usage: <script src="/atenti.js" data-atenti-id="123a123123"></script>
 * Todo: implement api keys etc..
 * Todo: Ensure that only the client can run their analytics on their website
+* Todo: OTP Stuff
 * Todo - minify file to improve performance and obfuscate
 * TODO: handle send failures as logs to server..
 *
 */
 (function () {
     console.log('Atenti is active');
-    checkReadyState()
+    checkReadyState();
 })();
 
 /*
@@ -27,7 +28,7 @@ function checkReadyState() {
             if (document.readyState == "complete") {
                 applyMutationListener();
             }
-        }
+        };
     }
 }
 
@@ -41,7 +42,7 @@ function applyMutationListener() {
 
     // Fetch Client ID and Target Tag
     // TODO: remove client id and use 'atenti' as id for poc
-    const atentiData = document.head.querySelectorAll('[data-atenti-id]')[0].dataset
+    const atentiData = document.head.querySelectorAll('[data-atenti-id]')[0].dataset;
 
     // Options for the observer (which mutations to observe)
     // TODO: clean up options
@@ -58,7 +59,7 @@ function applyMutationListener() {
 
                 if (removedNode) {
                     if (removedNode.className === atentiData.atentiTarget) {
-                        sendData(window.location.hostname, atentiData.atentiTarget)
+                        sendData(window.location.hostname, atentiData.atentiTarget);
                         console.log('Atenti ID', atentiData.atentiId);
                         console.log('Atenti Target', atentiData.atentiId);
                     }
@@ -80,14 +81,14 @@ function applyMutationListener() {
 * @param hostname : the host site where the script runs
 * @param element : the DOM element that was modified by the user
 */
-function sendData(hostname, element) {
+function sendData(hostname, node) {
     // Create function, probably async function?
     const Http = new XMLHttpRequest();
-    const url = new URL('http://localhost:3000/analytics');
+    const url = new URL('http://localhost:3000/api/v1/events');
     const queryParams = url.searchParams;
 
     queryParams.set("domain", hostname);
-    queryParams.set("element", element);
+    queryParams.set("node", node);
 
     // Append query params to Search attribute
     url.search = queryParams.toString();
