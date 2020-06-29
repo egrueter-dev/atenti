@@ -10,15 +10,89 @@
 *
 */
 (function () {
+    'use strict'
     console.log('Atenti is active');
+
+    // save the original method before overwriting them
+    EventTarget.prototype._addEventListener = Element.prototype.addEventListener;
+
+    /**
+     * [addEventListener description]
+     * @param {[type]}  type       [description]
+     * @param {[type]}  listener   [description]
+     * @param {Boolean} useCapture [description]
+     */
+    EventTarget.prototype.addEventListener = function (type, listener, useCapture = false) {
+        // declare listener
+        this._addEventListener(type, listener, useCapture);
+
+        if (!this.eventListenerList) this.eventListenerList = {};
+        if (!this.eventListenerList[type]) this.eventListenerList[type] = [];
+
+        // add listener to  event tracking list
+        this.eventListenerList[type].push({ type, listener, useCapture });
+    };
+
+    /**
+    * [removeEventListener description]
+    * @param  {[type]}  type       [description]
+    * @param  {[type]}  listener   [description]
+    * @param  {Boolean} useCapture [description]
+    * @return {[type]}             [description]
+    */
+    Element.prototype.removeEventListener = function (type, listener, useCapture = false) {
+        // remove listener
+        this._removeEventListener(type, listener, useCapture);
+
+        if (!this.eventListenerList) this.eventListenerList = {};
+        if (!this.eventListenerList[type]) this.eventListenerList[type] = [];
+
+        // Find the event in the list, If a listener is registered twice, one
+        // with capture and one without, remove each one separately. Removal of
+        // a capturing listener does not affect a non-capturing version of the
+        // same listener, and vice versa.
+        for (let i = 0; i < this.eventListenerList[type].length; i++) {
+            if (this.eventListenerList[type][i].listener === listener && this.eventListenerList[type][i].useCapture === useCapture) {
+                this.eventListenerList[type].splice(i, 1);
+                break;
+            }
+        }
+        // if no more events of the removed event type are left,remove the group
+        if (this.eventListenerList[type].length == 0) delete this.eventListenerList[type];
+    };
+
+    /**
+    * [getEventListeners description]
+    * @param  {[type]} type [description]
+    * @return {[type]}      [description]
+    */
+    EventTarget.prototype.getEventListeners = function (type) {
+        if (!this.eventListenerList) this.eventListenerList = {};
+
+        // return reqested listeners type or all them
+        if (type === undefined) return this.eventListenerList;
+        return this.eventListenerList[type];
+    };
+
+    // TODO: Remove 'beforeUnload' event listeners created after the page
+    // Loads. you want to preserve anything there prior to page load.
+    // probaby need to listen to events.
+    //
+    // https://developer.mozilla.org/en-US/docs/Web/API/BeforeUnloadEvent
+
+
+    // Very important. This must be removed to prevent the user from stopping a refresh
+    // Is this still needed?
+    // there may be other attributes that need to be removed.
+    delete window.onbeforeunload;
+
+
     checkReadyState();
 })();
 
-/*
-* checkReadyState 
-* Check that the document is ready for the mutation observer to be added
-* then apply the mutationListener
-* document Node - DOCUMENT
+/**
+* [checkReadyState Check that the document is ready for 
+* the mutation observer to be added, then apply the mutationListener]
 */
 function checkReadyState() {
     if (document.readyState === 'ready' || document.readyState === 'complete') {
@@ -33,12 +107,13 @@ function checkReadyState() {
 }
 
 /*
-* applyMutationListener
+* [applyMutationListener]
 * Applies the mutation listener to the page and handles logic
 * when mutation to specific dom elements occur.
 */
 function applyMutationListener() {
-    const targetNode = document.getElementById('body');
+    // target <html> and all children for observation
+    const targetNode = document.documentElement;
 
     // Fetch Client ID and Target Tag
     // TODO: remove client id and use 'atenti' as id for poc
@@ -54,19 +129,26 @@ function applyMutationListener() {
         // Use traditional 'for loops' for IE 11
         for (let mutation of mutationsList) {
             if (mutation.type === 'childList') {
-
                 const removedNode = mutation.removedNodes[0];
 
                 if (removedNode) {
+
+                    if (removedNode.dataset["atentiId"] !== undefined) {
+                        // Important that we re-load from window, not document
+                        // so we can overthrow any listeners targeted to
+                        // window specifically.
+                        // Log event
+                        window.location.reload();
+                        console.log("Atenti removal");
+                    }
+
                     if (removedNode.className === atentiData.atentiTarget) {
                         sendData(window.location.hostname, atentiData.atentiTarget);
-                        console.log('Atenti ID', atentiData.atentiId);
-                        console.log('Atenti Target', atentiData.atentiId);
+                       window.location.reload();
                     }
                 }
             }
         }
-
     };
 
     // Create an observer instance linked to the callback function
