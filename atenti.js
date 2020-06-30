@@ -13,8 +13,8 @@
     'use strict'
     console.log('Atenti is active');
 
-    // save the original method before overwriting them
-    EventTarget.prototype._addEventListener = Element.prototype.addEventListener;
+    // save the original addEventListener method before overwriting them
+    EventTarget.prototype._addEventListener = EventTarget.prototype.addEventListener;
 
     /**
      * [addEventListener description]
@@ -40,7 +40,7 @@
     * @param  {Boolean} useCapture [description]
     * @return {[type]}             [description]
     */
-    Element.prototype.removeEventListener = function (type, listener, useCapture = false) {
+    EventTarget.prototype.removeEventListener = function (type, listener, useCapture = false) {
         // remove listener
         this._removeEventListener(type, listener, useCapture);
 
